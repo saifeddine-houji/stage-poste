@@ -50,7 +50,7 @@ const registerUser = async(req,res)=>{
                         User.create(newUser)
                             .then(async u =>{
                                 mailer(u)
-                                res.status(200).json("account registered successfully!")
+                                res.status(200).json("account registered successfully! Please check your email for the verification message before logging in!")
                             })
                     })
                 })
@@ -60,10 +60,56 @@ const registerUser = async(req,res)=>{
 }
 
 
-const confirm =(req,res)=>{
+const login = async(req,res)=>{
+
+    const {email,password}= req.body;
+    console.log(email)
+
+    const {errors,isValid}=validationLogin(req.body);
+    console.log(isValid)
+
+    if(!isValid){
+        return res.status(400).json({error:errors});
+    }
+
+    else{
+        const userFound = await User.findOne({email:email});
+
+        if (!userFound){
+            return res.status(400).json({error:"There is no user with this email!"})
+        }
+
+        if (userFound.activeUser ==0)
+        {
+            return res.status(400).json("This account has been suspended for inactivity")
+        }
+
+        if (userFound.confirm == 0)
+        {
+            return res.status(400).json("You have to confirm your account before logging in. Please check your email.")
+        }
+
+        let isMatch = await bcrypt.compare(req.body.password,userFound.password)
+
+        if(!isMatch)
+        {
+            return res.status(401).json({error:"Incorrect password"})
+        }
+
+        const token =jwt.sign({
+            id:userFound._id, role:userFound.role
+        },
+            process.env.JWT);
+        const {password,role, ...otherDetails} = userFound._doc;
+       return res.cookie("access_token",token,{httpOnly:true}).status(200).json({details:{...otherDetails},role});
+    }
+}
+
+
+const confirmAccount =(req,res)=>{
     User.updateOne({_id:String(req.params.id)},{$set:{confirm:1}})
         .then(result=>res.status(200).json({msg:'account has been confirmed!'}))
         .catch(err=>res.status(500).json({msg:'something went wrong!'}))
 }
 
-module.exports={registerUser,confirm}
+module.exports={registerUser,confirmAccount,login}

@@ -30,7 +30,7 @@ module.exports = async function main(receiver, mode = true, code) {
             to: receiver.email, // list of receivers
             subject: "Hello ", // Subject line
             text: "thank you for registration", // plain text body
-            html: `thank you for registration ${receiver.userName}<br/><a href='http://localhost:5000/confirm/${receiver._id}'>confirm</a>`, // html body
+            html: `thank you for registration ${receiver.userName}<br/><a href='http://localhost:5000/confirmAccount/${receiver._id}'>confirm</a>`, // html body
         });
 
     } else {
