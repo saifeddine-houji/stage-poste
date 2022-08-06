@@ -18,18 +18,19 @@ const getUserById = (req,res)=>{
     })
 }
 
+const updateUser = async (req,res,next)=>{
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.user.id,
+            { $set: req.body },
+            { new: true }
+        );
+        res.status(200).json(updatedUser);
+    } catch (err) {
+        next(err);
+    }
+}
 
-
-
-/*    async (req,res)=>{
-    if(!req.body)
-        return res.status(400).json('user data required!');
-    User.create(req.body,(err,result)=>{
-        if(err)
-            return res.status(500).json(err);
-        return res.status(200).json(result);
-    })
-}*/
 
 const listUsers = async(req,res)=>{
     const list = await User.find();
@@ -40,14 +41,12 @@ const listUsers = async(req,res)=>{
 }
 
 const deleteUser = async(req,res)=>{
-    if(!req.params.idUser)
-        return res.status(400).json('user id required');
 
-    const result = await User.deleteOne({_id:req.params.idUser});
+    const result = await User.deleteOne({_id:req.user.id});
     if (result)
         return res.status(200).json(result);
     return res.status(500).json('oops! something went wrong.');
 }
 
-module.exports={getUserById,registerUser,listUsers,deleteUser,confirmAccount,login}
+module.exports={getUserById,registerUser,listUsers,deleteUser,confirmAccount,login,updateUser}
 

@@ -106,6 +106,9 @@ const login = async(req,res)=>{
 }
 
 
+//const verify
+
+
 const confirmAccount =(req,res)=>{
     User.updateOne({_id:String(req.params.id)},{$set:{confirm:1}})
         .then(result=>res.status(200).json({msg:'account has been confirmed!'}))
