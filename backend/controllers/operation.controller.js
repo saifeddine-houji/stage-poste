@@ -8,7 +8,9 @@ const createOperation = (req,res)=>{
         return res.status(400).json({err:'project required'});
     Operation.create(req.body)
         .then(operation=>{
-            User.findByIdAndUpdate(req.user._id,{$push:{PerformedOperations:operation._id}})
+            console.log(operation)
+            console.log(req.user.id)
+            User.findByIdAndUpdate(req.user.id,{$push:{PerformedOperations:operation._id}})
                 .catch(err=>{return res.status(500).json({msg:'internal server error',err:err})})
             return res.status(200).json({operation:operation})
         })

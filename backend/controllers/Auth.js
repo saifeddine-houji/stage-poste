@@ -34,7 +34,7 @@ const registerUser = async(req,res)=>{
                     password:req.body.password,
                     birthDate:req.body.birthDate,
                     state:req.body.state,
-                    img:req.body.img,
+                    img:'/uploadedImages/'+req.files[0].filename,
                     phone:req.body.phone,
                     gender:req.body.gender,
 
