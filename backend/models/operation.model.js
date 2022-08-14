@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Types, Schema} = require("mongoose");
 
 const operationSchema = mongoose.Schema({
-    operationName:{
+    operation:{
         type:String
     },
 

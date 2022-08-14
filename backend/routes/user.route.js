@@ -10,7 +10,7 @@ router.get('/getUser/:idUser',verifyAdmin,getUserById);
 router.post('/signIn',upload.any("imgProfile"),registerUser);
 router.post('/login',login);
 router.put('/updateUser/:id',verifyUser,updateUser);
-router.get('/confirmAccount/:id',confirmAccount)
+router.get('/confirmAccount/:id',confirmAccount);
 router.get('/listUsers',verifyAdmin,listUsers);
 router.delete('/deleteUser/:id',verifyUser,deleteUser);
 

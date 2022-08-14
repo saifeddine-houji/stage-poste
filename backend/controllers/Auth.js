@@ -63,10 +63,8 @@ const registerUser = async(req,res)=>{
 const login = async(req,res)=>{
 
     const {email,password}= req.body;
-    console.log(email)
 
     const {errors,isValid}=validationLogin(req.body);
-    console.log(isValid)
 
     if(!isValid){
         return res.status(400).json({error:errors});
