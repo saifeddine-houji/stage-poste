@@ -2,7 +2,13 @@ const mongoose = require('mongoose');
 const {Types, Schema} = require("mongoose");
 
 const operationSchema = mongoose.Schema({
-    operation:{
+
+    operationType:{
+        type:String,
+        enum:['MANDAT_SEND','MANDAT_RECEIVE','ACCOUNT_DEPOSIT','ACCOUNT_WITHDRAW','PAY_BILL','CREATE_EDINAR_CARD']
+    },
+
+    operationInfo:{
         type:String
     },
 
