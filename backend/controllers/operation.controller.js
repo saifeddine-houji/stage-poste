@@ -94,7 +94,6 @@ const getTotalOperationsPerDate = async (req,res)=>{
     var payBills = 0;
     var edinarCard = 0;
 
-    //MANDAT_SEND','MANDAT_RECEIVE','ACCOUNT_DEPOSIT','ACCOUNT_WITHDRAW','PAY_BILL','CREATE_EDINAR_CARD
     for (var i=0;i<list.length;i++)
     {
         totalOperationsThisYear++;
@@ -147,6 +146,44 @@ const getTotalOperationsPerDate = async (req,res)=>{
 
 }
 
+const filterOperationsDateType = async(req,res)=>{
+    if (!req.body.start)
+        return res.status(400).json({err:'starting date required'});
+
+    if (!req.body.end)
+        return res.status(400).json({err:'end date required'});
+
+    if (!req.body.type)
+        return res.status(400).json({err:'type of operation required'});
+
+    let start = new Date(req.body.start);
+    let end = new Date(req.body.end);
+
+    end.setDate(end.getDate()+1);
+
+    if(Date.parse(start)-Date.parse(end)>0)
+        return res.status(405).json('the end date needs to be later than the start date!')
+
+    const result = await Operation.find({createdAt:{$gte:start,$lte:end},operationType:req.body.type})
+        .then(re=>{
+
+        const operationData=[];
+
+        for(let i=0;i<re.length;i++)
+        {
+            operationData[i] = {
+                id: re[i]._id,
+                operationType:re[i].operationType,
+                operationInfo: JSON.parse(re[i].operationInfo),
+                createdAt:re[i].createdAt,
+                updatedAt:re[i].updatedAt,
+            };
+        }
+        return res.status(200).json(operationData);
+    })
+        .catch(err=>{return res.status(500).json({err:err})})
+}
+
 const deleteOperation = async (req,res)=>{
     const result = await Operation.deleteOne({_id:req.params.id});
     if(result)
@@ -158,4 +195,4 @@ const deleteOperation = async (req,res)=>{
 
 
 
-module.exports={createOperation,deleteOperation,getOperationById,listOperations,listOperationsByClientId,getTotalOperationsPerDate}
+module.exports={createOperation,deleteOperation,getOperationById,listOperations,listOperationsByClientId,getTotalOperationsPerDate,filterOperationsDateType}

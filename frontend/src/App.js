@@ -1,27 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import React from "react";
+import PublicRouteHandler from './utils/PublicRouteHandler';
+import PrivateRoute from './utils/PrivateRoute';
+import {BrowserRouter,Route,Routes} from "react-router-dom";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <!-- comment to test -->
-        <!-- comment to test -->
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/*standard routes*/}
+
+
+        {/*registration and login here*/}
+        <Route exact path='/' element={<PublicRouteHandler />} >
+        </Route>
+
+
+        {/*routes that require a user to be connected to access*/}
+
+        <Route exact path='/' element={<PrivateRoute />} >
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
