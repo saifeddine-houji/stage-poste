@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import { setConnected } from '../redux/actions/AuthActions';
 
 const PrivateRoute = () => {// If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page

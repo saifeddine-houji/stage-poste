@@ -4,6 +4,7 @@ import React from "react";
 import PublicRouteHandler from './utils/PublicRouteHandler';
 import PrivateRoute from './utils/PrivateRoute';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Routes>
         {/*standard routes*/}
 
+          <Route path='/' element={<Home/>}/>
 
         {/*registration and login here*/}
         <Route exact path='/' element={<PublicRouteHandler />} >
