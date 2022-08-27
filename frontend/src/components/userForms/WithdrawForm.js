@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from "react";
 import Modal from"../Modal/Modal"
 
-const MandatReceiveForm = () =>{
+const WithdrawForm =()=>{
     const [useModal,setUseModal]=useState(false);
     return(
         <div className="container mt-5">
@@ -13,31 +13,8 @@ const MandatReceiveForm = () =>{
 
                         <form>
                             <div className="homepage-titles">
-                                <h1>Receive Mandat</h1>
-                                <h3>Sender information</h3>
+                                <h1>Withdraw from account</h1>
                             </div>
-
-                            <div className="formUnit">
-                                <div className="form-outline col-5 mb-4">
-                                    <label className="form-label" htmlFor="form2Example11">Full name</label>
-                                    <input  type="text" id="form2Example11" className="form-control"
-                                            placeholder="Full name"/>
-                                </div>
-
-                                <div className="form-outline col-5 mb-4">
-                                    <label className="form-label" htmlFor="form2Example11">Adress</label>
-                                    <input  type="text" id="form2Example11" className="form-control"
-                                            placeholder="Adress"/>
-                                </div>
-                            </div>
-
-
-
-
-                            <div className="homepage-titles">
-                                <h3>Recipient information</h3>
-                            </div>
-
 
                             <div className="formUnit">
                                 <div className="form-outline col-5 mb-4">
@@ -53,17 +30,18 @@ const MandatReceiveForm = () =>{
                                 </div>
                             </div>
 
+
+
                             <div className="formUnit">
                                 <div className="form-outline col-5 mb-4">
-                                    <label className="form-label" htmlFor="form2Example11">Address</label>
+                                    <label className="form-label" htmlFor="form2Example11">Account number</label>
                                     <input  type="text" id="form2Example11" className="form-control"
-                                            placeholder="Address"/>
+                                            placeholder="Account number"/>
                                 </div>
-
                                 <div className="form-outline col-5 mb-4">
-                                    <label className="form-label" htmlFor="form2Example11">Operation ID</label>
+                                    <label className="form-label" htmlFor="form2Example11">Amount</label>
                                     <input  type="text" id="form2Example11" className="form-control"
-                                            placeholder="Operation ID"/>
+                                            placeholder="Amount"/>
                                 </div>
                             </div>
 
@@ -87,4 +65,4 @@ const MandatReceiveForm = () =>{
     )
 }
 
-export default MandatReceiveForm;
+export default WithdrawForm;

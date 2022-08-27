@@ -5,6 +5,7 @@ import PublicRouteHandler from './utils/PublicRouteHandler';
 import PrivateRoute from './utils/PrivateRoute';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         {/*standard routes*/}
 
           <Route path='/' element={<Home/>}/>
+          {/*change dashboard to connected only later*/}
+          <Route path='/Dashboard/*' element={<Dashboard />} />
 
         {/*registration and login here*/}
         <Route exact path='/' element={<PublicRouteHandler />} >

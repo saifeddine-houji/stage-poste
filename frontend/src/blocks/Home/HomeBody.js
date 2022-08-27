@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import MandatSendForm from "../../components/userForms/MandatSendForm";
 import MandatReceiveForm from "../../components/userForms/MandatReceiveForm";
+import DepositForm from "../../components/userForms/DepositForm";
+import WithdrawForm from "../../components/userForms/WithdrawForm";
+import CreateCardForm from "../../components/userForms/CreateCardForm";
 
 
 const HomeBody = ()=>{
@@ -29,7 +32,10 @@ const HomeBody = ()=>{
 
             {show === 0 && <MandatSendForm/> }
             {show === 1 && <MandatReceiveForm/> }
-           {/* {show === 1 && <Contributors/> }*/}
+            {show === 2 && <DepositForm/> }
+            {show === 3 && <WithdrawForm/> }
+            {show === 4 && <CreateCardForm/> }
+
         </div>
     )
 }

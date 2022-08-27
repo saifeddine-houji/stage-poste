@@ -1,6 +1,9 @@
 import React from "react";
+import {useState} from "react";
+import Modal from"../Modal/Modal"
 
 const MandatSendForm=()=>{
+    const [useModal,setUseModal]=useState(false);
     return(
         <div className="container mt-5">
             <div className="row d-flex justify-content-center align-items-center">
@@ -70,12 +73,12 @@ const MandatSendForm=()=>{
                             </div>
 
                             <div className="text-center pt-1 mb-5 pb-1 d-flex justify-content-center align-items-center">
-                                <button
+                                <button onClick={()=>{setUseModal(true)}}
                                         className="btn btn-info btn-block col-3"
                                         type="submit">Confirm
                                 </button>
 
-
+                                {useModal && <Modal closeModal={setUseModal}/>}
 
                             </div>
 
