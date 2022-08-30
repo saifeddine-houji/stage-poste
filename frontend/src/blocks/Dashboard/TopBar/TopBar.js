@@ -13,6 +13,7 @@ const TopBar = () =>{
 
                     <Link to="/">
                         <img className="topbarImage" src="/assets/images/poste-logo.jpg" alt=""/>
+                        <span style={{'margin-left':'20px','text-decoration':'none'}}>Back to client interface</span>
                     </Link>
                 </div>
 
