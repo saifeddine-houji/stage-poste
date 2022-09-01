@@ -6,6 +6,10 @@ const mailer = require('../utils/mailer');
 const validationRegister = require('../utils/validateRegister');
 const validationLogin = require('../utils/validateLogin');
 
+
+let refreshTokens = [];
+
+
 const registerUser = async(req,res)=>{
 
     //check if all info is provided
@@ -94,18 +98,40 @@ const login = async(req,res)=>{
             return res.status(401).json({error:"Incorrect password"})
         }
 
-        const token =jwt.sign({
+        const accessToken = jwt.sign({
+            email:userFound.email,
+        },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+                expiresIn: "30s",
+            }
+        );
+
+        const refreshToken = jwt.sign({
+            email:email,
+        },
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+                expiresIn: "1d",
+            });
+
+        refreshTokens.push(refreshToken);
+
+        return res.json({
+            accessToken,
+            refreshToken,
+            user:userFound
+        });
+
+/*        const token =jwt.sign({
             id:userFound._id, role:userFound.role
         },
             process.env.JWT);
         const {password,role, ...otherDetails} = userFound._doc;
        return res.cookie("access_token",token,{httpOnly:true}).status(200).json({details:{...otherDetails},role});
+    */
     }
 }
-
-
-//const verify
-
 
 const confirmAccount =(req,res)=>{
     User.updateOne({_id:String(req.params.id)},{$set:{confirm:1}})
@@ -113,4 +139,46 @@ const confirmAccount =(req,res)=>{
         .catch(err=>res.status(500).json({msg:'something went wrong!'}))
 }
 
-module.exports={registerUser,confirmAccount,login}
+const generateAccessToken = async (req,res)=>{
+
+    //returns error if token isn't provided
+    if(!req.body.refresh){
+        return res.status(401).json({msg:'Token not found'})
+    }
+
+    //returns error if token doesn't exist
+    if(!refreshTokens.includes(req.body.refresh)){
+        return res.status(403).json({
+            errors:[
+                {
+                    msg:"invalid refresh token"
+                }
+            ]
+        })
+    }
+    try{
+        const user = jwt.verify(
+            req.body.refresh,
+            process.env.REFRESH_TOKEN_SECRET
+        );
+        const {email} = user;
+        const accessToken = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: "30s"});
+        return res.json(accessToken);
+    }
+    catch(error){
+        return res.status(403).json({
+            errors:[
+                {
+                    msg:"invalid token"
+                }
+            ]
+        })
+    }
+}
+
+const logout=(req,res)=>{
+    refreshTokens=refreshTokens.filter((token)=>token !==req.body);
+    return res.status(204).json({msg:"logout successful"})
+}
+
+module.exports={registerUser,confirmAccount,login,logout,refreshTokens,generateAccessToken}

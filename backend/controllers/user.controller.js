@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler');
 const validationRegister=require('../utils/validateRegister');
 
 
-const {registerUser,confirmAccount,login} = require('./Auth');
+const {registerUser,confirmAccount,login,logout,generateAccessToken} = require('./Auth');
 
 const getUserById = (req,res)=>{
     if(!req.params.idUser)
@@ -48,5 +48,5 @@ const deleteUser = async(req,res)=>{
     return res.status(500).json('oops! something went wrong.');
 }
 
-module.exports={getUserById,registerUser,listUsers,deleteUser,confirmAccount,login,updateUser}
+module.exports={getUserById,registerUser,listUsers,deleteUser,confirmAccount,login,updateUser,logout,generateAccessToken}
 

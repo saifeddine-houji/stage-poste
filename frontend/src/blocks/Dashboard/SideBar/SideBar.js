@@ -1,7 +1,10 @@
 import React from "react";
 import "./SideBar.css";
 import {Home, Timeline, Person, Store} from '@mui/icons-material';
+import SearchIcon from '@mui/icons-material/Search';
 import {Link} from "react-router-dom";
+import SearchUserOps from "../searchUserOps/SearchUserOps";
+import Statistics from "../Statistics/Statistics";
 
 const SideBar =()=>{
     return(
@@ -16,13 +19,13 @@ const SideBar =()=>{
                             <Home className="sidebarIcon"/> <Link to="/Dashboard">Home</Link>
                         </li>
                         <li className="sidebarItem">
-                            <Timeline className="sidebarIcon"/> Statistics
+                            <Timeline className="sidebarIcon"/> <Link to="/Dashboard/Statistics">Statistics</Link>
                         </li>
                         <li className="sidebarItem">
-                            <Person className="sidebarIcon"/> <Link to="/Dashboard/user">Users</Link>
+                            <Person className="sidebarIcon"/> <Link to="/Dashboard/SearchUserOps">Search by user</Link>
                         </li>
                         <li className="sidebarItem">
-                            <Store className="sidebarIcon"/> Projects
+                            <SearchIcon className="sidebarIcon"/> <Link to="/Dashboard/SearchOpById">Lookup operation by ID</Link>
                         </li>
                     </ul>
                 </div>

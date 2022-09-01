@@ -4,6 +4,9 @@ import TopBar from "../../blocks/Dashboard/TopBar/TopBar";
 import SideBar from "../../blocks/Dashboard/SideBar/SideBar";
 import DashboardHome from "../../blocks/Dashboard/DashboardHome/DashboardHome";
 import {Routes,Route} from "react-router-dom";
+import SearchOpById from "../../blocks/Dashboard/SearchOpById/SearchOpById";
+import SearchUserOps from "../../blocks/Dashboard/searchUserOps/SearchUserOps";
+import Statistics from "../../blocks/Dashboard/Statistics/Statistics";
 
 const Dashboard =()=>{
     return(
@@ -18,6 +21,9 @@ const Dashboard =()=>{
 
                 <Routes>
                     <Route path='/' element={<DashboardHome />} />
+                    <Route path='/SearchOpById' element={<SearchOpById />} />
+                    <Route path='/SearchUserOps' element={<SearchUserOps />} />
+                    <Route path='/Statistics' element={<Statistics />} />
                 </Routes>
 
 
