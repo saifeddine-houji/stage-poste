@@ -25,7 +25,7 @@ const registerUser = async(req,res)=>{
         .then(user=>{
             if(user)
             {
-                return res.status(400).json('Email already in use!');
+                return res.status(400).json({error:'Email already in use!'});
             }
 
             else
@@ -54,7 +54,7 @@ const registerUser = async(req,res)=>{
                         User.create(newUser)
                             .then(async u =>{
                                 mailer(u)
-                                res.status(200).json("account registered successfully! Please check your email for the verification message before logging in!")
+                                res.status(200).json({error:"account registered successfully! Please check your email for the verification message before logging in!"})
                             })
                     })
                 })
@@ -83,12 +83,12 @@ const login = async(req,res)=>{
 
         if (userFound.activeUser ==0)
         {
-            return res.status(400).json("This account has been suspended for inactivity")
+            return res.status(400).json({error:"This account has been suspended for inactivity"})
         }
 
         if (userFound.confirm == 0)
         {
-            return res.status(400).json("You have to confirm your account before logging in. Please check your email.")
+            return res.status(400).json({error:"You need to confirm your account first! please check your emails."})
         }
 
         let isMatch = await bcrypt.compare(req.body.password,userFound.password)
@@ -99,11 +99,11 @@ const login = async(req,res)=>{
         }
 
         const accessToken = jwt.sign({
-            email:userFound.email,
+            email:userFound.email,id:userFound._id, role:userFound.role
         },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "30s",
+                expiresIn: "50000s",
             }
         );
 
@@ -112,12 +112,14 @@ const login = async(req,res)=>{
         },
             process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "1d",
+                expiresIn: "1y",
             });
 
         refreshTokens.push(refreshToken);
 
-        return res.json({
+        console.log("login",refreshTokens)
+
+        return res.cookie("access_token",accessToken,{httpOnly:true}).status(200).json({
             accessToken,
             refreshToken,
             user:userFound
@@ -132,6 +134,7 @@ const login = async(req,res)=>{
     */
     }
 }
+
 
 const confirmAccount =(req,res)=>{
     User.updateOne({_id:String(req.params.id)},{$set:{confirm:1}})
@@ -148,6 +151,8 @@ const generateAccessToken = async (req,res)=>{
 
     //returns error if token doesn't exist
     if(!refreshTokens.includes(req.body.refresh)){
+        console.log("req body",req.body.refresh)
+        console.log("tab",refreshTokens)
         return res.status(403).json({
             errors:[
                 {
@@ -162,7 +167,7 @@ const generateAccessToken = async (req,res)=>{
             process.env.REFRESH_TOKEN_SECRET
         );
         const {email} = user;
-        const accessToken = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: "30s"});
+        const accessToken = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: "5s"});
         return res.json(accessToken);
     }
     catch(error){
@@ -177,6 +182,7 @@ const generateAccessToken = async (req,res)=>{
 }
 
 const logout=(req,res)=>{
+    console.log("refresh",refreshTokens);
     refreshTokens=refreshTokens.filter((token)=>token !==req.body);
     return res.status(204).json({msg:"logout successful"})
 }

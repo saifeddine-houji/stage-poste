@@ -25,6 +25,10 @@ export default function (state = initialState,action){
                 isConnected : true,
                 tokens:action.payload,
                 user:action.user
+                //operation:{
+                //type:"mandat",
+               // information:action.operation
+                // }
             }
 
         case ERROR:
@@ -34,8 +38,10 @@ export default function (state = initialState,action){
 
         case SET_CONNECTED:
             return{
-                ...state,
-                isConnected: true
+                //...state,
+                isConnected: true,
+                tokens:action.payload,
+                user:action.user
             }
 
         case LOGOUT:

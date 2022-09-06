@@ -24,7 +24,7 @@ export const RegistrationAction = (user)=>dispatch=>{
 }
 
 export const LoginAction = (credentials)=>dispatch=>{
-    axios.post("http://localhost:5000/login",credentials)
+    axios.post("http://localhost:5000/login",credentials,{ withCredentials: true })
         .then(result=>{
             dispatch({
                 type:LOGIN_ACTION,
@@ -36,20 +36,26 @@ export const LoginAction = (credentials)=>dispatch=>{
             dispatch({
                 type:ERROR,
                 payload:err.response
+
             })
         })
 }
 
-export const setConnected=()=>dispatch=>{
+export const setConnected=(token,user)=>dispatch=>{
+    console.log("actions",token,user)
     dispatch({
-        type:SET_CONNECTED
+        type:SET_CONNECTED,
+        payload:{accessToken:token.accessToken,refreshToken:token.refreshToken},
+        user:user
     })
 }
 
 export const logout =()=>dispatch=>{
     const authTokens = JSON.parse(localStorage.getItem('authTokens'))
-    axiosInstance.delete("/logout",authTokens)
+    console.log("logout",authTokens)
+    axiosInstance.delete("/logout",authTokens,{ withCredentials: true })
         .then(result=>{
+            console.log("test")
             dispatch({
                 type:LOGOUT
             })

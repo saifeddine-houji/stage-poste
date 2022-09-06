@@ -3,6 +3,9 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true };
 const connectDB = require('./config/db');
 const userRoute = require('./routes/user.route');
 const operationRoute = require('./routes/operation.route');
@@ -13,7 +16,8 @@ const app = express();
 app.use(bodyParser.json({limit : "50mb", extended : true}));
 app.use(bodyParser.urlencoded({limit : "50mb", extended : true}));
 connectDB();
-app.use(cors());
+/*app.use(cors())*/
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 //middlewares

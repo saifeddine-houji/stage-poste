@@ -12,9 +12,9 @@ const createOperation = (req,res)=>{
         operationInfo:JSON.stringify(req.body.operationInfo)
     });
 
-
     Operation.create(dataString)
         .then(operation=>{
+            console.log("user",req.user)
 
             User.findByIdAndUpdate(req.user.id,{$push:{PerformedOperations:operation._id}})
                 .catch(err=>{return res.status(500).json({msg:'internal server error',err:err})})

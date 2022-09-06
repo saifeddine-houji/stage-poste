@@ -9,7 +9,7 @@ const {ROLES,inRole} = require('../security/RoleMiddleware');
 router.get('/getUser/:idUser',verifyAdmin,getUserById);
 router.post('/signIn',upload.any("imgProfile"),registerUser);
 router.post('/login',login);
-router.post('token',generateAccessToken);
+router.post('/token',generateAccessToken);
 router.delete('/logout',logout);
 router.put('/updateUser/:id',verifyUser,updateUser);
 router.get('/confirmAccount/:id',confirmAccount);

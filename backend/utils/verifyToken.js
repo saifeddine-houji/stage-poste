@@ -8,12 +8,14 @@ const verifyToken = (req,res,next)=>{
         return next(createError(401,"you are not authenticated!"));
     }
 
-    jwt.verify(token,process.env.JWT,(err,user)=>{
+    jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+        console.log(err)
         if (err)
         {
             return next(createError(403,"invalid token!"));
         }
         req.user = user;
+        console.log(req.user)
         next();
     });
 

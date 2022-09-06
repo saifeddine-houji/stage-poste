@@ -1,5 +1,5 @@
 import './App.css';
-
+import axios from "axios"
 import React from "react";
 import PublicRouteHandler from './utils/PublicRouteHandler';
 import PrivateRoute from './utils/PrivateRoute';
@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 export default function App() {
+   // axios.defaults.withCredentials=true;
   return (
     <BrowserRouter>
       <Routes>
@@ -23,13 +24,16 @@ export default function App() {
 
         {/*registration and login here*/}
         <Route exact path='/' element={<PublicRouteHandler />} >
+
         </Route>
 
 
         {/*routes that require a user to be connected to access*/}
 
         <Route exact path='/' element={<PrivateRoute />} >
+
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

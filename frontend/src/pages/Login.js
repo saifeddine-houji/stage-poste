@@ -14,12 +14,10 @@ const Login =()=>{
     const navigate=useNavigate();
     const submit = async(data)=>{
         dispatch(LoginAction(data))
-        console.log(data)
-        console.log("1",AuthState)
     }
 
     useEffect(()=>{
-        console.log("1",AuthState)
+
         AuthState.isConnected && localStorage.setItem('authTokens',JSON.stringify(AuthState.tokens))
         AuthState.isConnected && localStorage.setItem('user',JSON.stringify(AuthState.user))
         localStorage.getItem('authTokens') && navigate('/');
@@ -69,15 +67,16 @@ const Login =()=>{
                                                 {(errors.password?.type ==="required") && <div className="alert alert-danger" role="alert">password required</div>}
                                                 {(errors.password?.type ==="minLength") && <div className="alert alert-danger" role="alert">password must contain at least 8 characters</div>}
 
+                                                {AuthState?.error?.data?.error && <div className="alert alert-danger" role="alert">
+                                                    {AuthState?.error?.data?.error}
+                                                </div>}
+
                                                 <div className="d-flex justify-content-around pt-1 mb-5 pb-1">
                                                     <button
                                                         className="btn btn-primary btn-block fa-lg gradient-custom-1 mb-3"
                                                         type="submit">Log in
                                                     </button>
                                                     {/* {AuthState.error.data?.error} */}
-                                                    {AuthState?.error?.data?.error && <div className="alert alert-danger" role="alert">
-                                                        {AuthState?.error?.data?.error}
-                                                    </div>}
 
                                                     <a className="text-muted" href="#"><Link to="/forgotPassword">Forgot
                                                         password ?</Link></a>
@@ -90,6 +89,8 @@ const Login =()=>{
                                                 </div>
 
                                             </form>
+
+
 
                                         </div>
 
