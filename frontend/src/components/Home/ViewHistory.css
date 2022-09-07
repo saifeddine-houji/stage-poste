@@ -1,0 +1,128 @@
+.ViewHistoryExample{
+    width: 50%;
+    margin: 80px auto;
+}
+
+.DashboardHomeWrapper{
+    flex: 1;
+    padding: 30px;
+    margin: 0px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -2px rgba(0,0,0,0.75);
+}
+
+.ViewHistoryItemTitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+    margin: auto;
+}
+
+.ViewHistoryitemsContainer{
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserNumber{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.UserTrend{
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    margin-left: 20px;
+}
+
+
+.WidgetLgExpenses{
+    flex: 2;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);
+    margin-top: 30px;
+}
+
+table,td,th{
+    border: #343a40 1px solid;
+}
+
+table{
+    border-collapse: collapse;
+    border-radius: 10px !important;
+}
+
+.WidgetLgTitleExpenses{
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: auto;
+    color: red;
+}
+
+.WidgetLgTable{
+    width: 100%;
+    border-spacing: 10px;
+}
+
+.WidgetLgTh{
+    text-align: left;
+    border: #343a40 1px solid;
+    padding: 10px;
+    color: crimson;
+}
+
+.WidgetLgUserColumn{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #000;
+}
+
+.WidgetLgTr{
+    border: #343a40 1px solid;
+}
+
+.WidgetLgProject{
+    font-weight: 500;
+    color: #000;
+    border: #343a40 1px solid;
+    padding: 10px;
+}
+
+.WidgetLgAmount, .WidgetLgDate{
+    font-weight: 400;
+    border: #343a40 1px solid;
+    padding: 10px;
+}
+
+.WidgetLgButton{
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    cursor: pointer;
+}
+
+.WidgetLgButton.Approved{
+    background-color: #dbffd9;
+    color: #3bb077;
+}
+
+.WidgetLgButton.Pending{
+    background-color: #ddfff3;
+    color: #2a7ade;
+}
+
+.WidgetLgButton.Declined{
+    background-color: #ffe2cf;
+    color: #d95087;
+}
+
+

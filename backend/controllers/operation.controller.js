@@ -14,7 +14,6 @@ const createOperation = (req,res)=>{
 
     Operation.create(dataString)
         .then(operation=>{
-            console.log("user",req.user)
 
             User.findByIdAndUpdate(req.user.id,{$push:{PerformedOperations:operation._id}})
                 .catch(err=>{return res.status(500).json({msg:'internal server error',err:err})})
@@ -26,7 +25,7 @@ const createOperation = (req,res)=>{
 const getOperationById = (req,res)=>{
     if(!req.params.idOperation)
         return res.status(400).json('operation id required');
-    Operation.findById(req.params.idOperation,(err,result)=>{
+     Operation.findById(req.params.idOperation,(err,result)=>{
         if (err) {
             return res.status(400).json(err);
         }
@@ -61,9 +60,19 @@ const listOperationsByClientId= async (req,res)=>{
         return res.status(400).json({err:'client id required'});
 
     const operations = await User.findById(req.params.idClient,{_id:0,PerformedOperations:1}).populate('PerformedOperations');
+    const counter = operations.PerformedOperations.length
 
-    return res.status(200).json(operations);
+    return res.status(200).json({operations:operations,counter:counter});
 }
+
+const listOperationsByClientIdClient= async (req,res)=>{
+
+    const operations = await User.findById(req.user.id,{_id:0,PerformedOperations:1}).populate('PerformedOperations');
+    const counter = operations.PerformedOperations.length
+
+    return res.status(200).json({operations:operations,counter:counter});
+}
+
 
 const getTotalOperationsPerDate = async (req,res)=>{
     if (!req.body)
@@ -195,4 +204,4 @@ const deleteOperation = async (req,res)=>{
 
 
 
-module.exports={createOperation,deleteOperation,getOperationById,listOperations,listOperationsByClientId,getTotalOperationsPerDate,filterOperationsDateType}
+module.exports={createOperation,deleteOperation,getOperationById,listOperations,listOperationsByClientId,getTotalOperationsPerDate,filterOperationsDateType,listOperationsByClientIdClient}

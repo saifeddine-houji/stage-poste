@@ -5,7 +5,7 @@ const operationSchema = mongoose.Schema({
 
     operationType:{
         type:String,
-        enum:['MANDAT_SEND','MANDAT_RECEIVE','ACCOUNT_DEPOSIT','ACCOUNT_WITHDRAW','PAY_BILL','CREATE_EDINAR_CARD']
+        enum:['MANDAT_SEND','MANDAT_RECEIVE','ACCOUNT_DEPOSIT','ACCOUNT_WITHDRAW','CREATE_EDINAR_CARD']
     },
 
     operationInfo:{

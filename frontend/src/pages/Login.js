@@ -57,6 +57,9 @@ const Login =()=>{
 
                                                 {(errors.email?.type ==="required") && <div className="alert alert-danger" role="alert">email required</div>}
                                                 {(errors.email?.type ==="pattern") && <div className="alert alert-danger" role="alert">invalid email format</div>}
+                                                {AuthState?.error?.data?.error && <div className="alert alert-danger" role="alert">
+                                                    {AuthState?.error?.data?.error}
+                                                </div>}
 
                                                 <div className="form-outline mb-4">
                                                     <input type="password" id="form2Example22"

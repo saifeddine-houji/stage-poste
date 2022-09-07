@@ -1,12 +1,15 @@
 
 const initialState={
     createOperation:{},
-    getOperation:{},
+    getOperationsUser:{},
+    getOperationByOpId:{},
     errors:{}
+
 }
 
 export const CREATE_OPERATION = "CREATEOP";
-export const GET_OPERATION = "GETOP";
+export const GET_OPERATIONS_USER = "GETOPSUSER";
+export const GET_OPERATIONS_BY_OP_ID = "GETOPBYOPID";
 export const ERROR = "ERROR";
 
 export default function (state=initialState,action){
@@ -16,11 +19,17 @@ export default function (state=initialState,action){
                 createOperation: "operation created"
             }
 
-        case GET_OPERATION:
+        case GET_OPERATIONS_USER:
             return{
                 ...state,
-                getOperation:action.payload
+                getOperationsUser:action.payload
             }
+
+        case GET_OPERATIONS_BY_OP_ID:
+        return {
+        ...state,
+            getOperationByOpId:action.payload
+        }
 
         case ERROR:
             return{

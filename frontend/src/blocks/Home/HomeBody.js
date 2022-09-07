@@ -5,7 +5,7 @@ import MandatReceiveForm from "../../components/userForms/MandatReceiveForm";
 import DepositForm from "../../components/userForms/DepositForm";
 import WithdrawForm from "../../components/userForms/WithdrawForm";
 import CreateCardForm from "../../components/userForms/CreateCardForm";
-
+import ViewHistory from "../../components/Home/ViewHistory";
 
 const HomeBody = ()=>{
     const [show, setShow] = useState(0)
@@ -35,6 +35,7 @@ const HomeBody = ()=>{
             {show === 2 && <DepositForm/> }
             {show === 3 && <WithdrawForm/> }
             {show === 4 && <CreateCardForm/> }
+            {show === 5 && <ViewHistory/> }
 
         </div>
     )

@@ -42,7 +42,7 @@ export const LoginAction = (credentials)=>dispatch=>{
 }
 
 export const setConnected=(token,user)=>dispatch=>{
-    console.log("actions",token,user)
+
     dispatch({
         type:SET_CONNECTED,
         payload:{accessToken:token.accessToken,refreshToken:token.refreshToken},
@@ -52,10 +52,10 @@ export const setConnected=(token,user)=>dispatch=>{
 
 export const logout =()=>dispatch=>{
     const authTokens = JSON.parse(localStorage.getItem('authTokens'))
-    console.log("logout",authTokens)
+
     axiosInstance.delete("/logout",authTokens,{ withCredentials: true })
         .then(result=>{
-            console.log("test")
+
             dispatch({
                 type:LOGOUT
             })
