@@ -75,6 +75,7 @@ const listOperationsByClientIdClient= async (req,res)=>{
 
 
 const getTotalOperationsPerDate = async (req,res)=>{
+
     if (!req.body)
         return res.status(400).json({err:'year required'});
 //this comment is how to filter inside the database on the creation year only
@@ -100,7 +101,6 @@ const getTotalOperationsPerDate = async (req,res)=>{
     var receiveMandat = 0;
     var deposit = 0;
     var withdraw = 0;
-    var payBills = 0;
     var edinarCard = 0;
 
     for (var i=0;i<list.length;i++)
@@ -133,11 +133,6 @@ const getTotalOperationsPerDate = async (req,res)=>{
                 break;
             }
 
-            case "PAY_BILL":
-            {
-                payBills=payBills+1;
-                break;
-            }
 
             case "CREATE_EDINAR_CARD":
             {
@@ -149,9 +144,8 @@ const getTotalOperationsPerDate = async (req,res)=>{
 
         }
     }
-
     return res.status(200).json({total:totalOperationsThisYear,MandatSent:sendMandat,MandatReceived:receiveMandat,deposited:deposit,withdrawn:withdraw,
-    billsPayed:payBills,edinarCards:edinarCard});
+    edinarCards:edinarCard});
 
 }
 

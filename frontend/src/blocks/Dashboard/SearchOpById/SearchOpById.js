@@ -19,32 +19,6 @@ const SearchOpById =()=>{
     const resultOperation = useSelector(state=>state.Operation.getOperationByOpId);
 console.log(resultOperation)
 
-/*
-    if(resultOperation!=undefined)
-    {
-        var operationTable=()=>{
-        return(
-            /!*keep switching the value of type and building the table contents*!/
-            /!*case 1 : mandat send*!/
-            {this:resultOperation.operationType === "MANDAT_SEND" && <tbody>
-                <tr>
-                    <td>Operation type</td>
-                    <td>{resultOperation.operationType}</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                </tr>
-                </tbody>}
-        )
-        }
-    }
-*/
-
 
     return(
         <div className="DashboardHome">
@@ -115,39 +89,39 @@ console.log(resultOperation)
                                                 {/*type : send mandat*/}
                                                 {resultOperation.operationType === "MANDAT_SEND" && <tbody>
                                                 <tr>
-                                                    <td>Operation Type</td>
-                                                    <td>{resultOperation.operationType}</td>
+                                                    <td className="WidgetLgUserColumn">Operation Type</td>
+                                                    <td>Sending mandat</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient Name</td>
+                                                    <td className="WidgetLgUserColumn">Recipient Name</td>
                                                     <td>{resultOperation.operationInfo.recipientName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender Name</td>
+                                                    <td className="WidgetLgUserColumn">Sender Name</td>
                                                     <td>{resultOperation.operationInfo.senderName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient CIN</td>
+                                                    <td className="WidgetLgUserColumn">Recipient CIN</td>
                                                     <td>{resultOperation.operationInfo.CINrecipient}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender CIN</td>
+                                                    <td className="WidgetLgUserColumn">Sender CIN</td>
                                                     <td>{resultOperation.operationInfo.CINsender}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Amount</td>
+                                                    <td className="WidgetLgUserColumn">Amount</td>
                                                     <td>{resultOperation.operationInfo.amount}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient address</td>
+                                                    <td className="WidgetLgUserColumn">Recipient address</td>
                                                     <td>{resultOperation.operationInfo.addressRecipient}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender address</td>
+                                                    <td className="WidgetLgUserColumn">Sender address</td>
                                                     <td>{resultOperation.operationInfo.addressSender}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Date performed</td>
+                                                    <td className="WidgetLgUserColumn">Date performed</td>
                                                     <td>{resultOperation.createdAt.split('T')[0]}</td>
                                                 </tr>
 
@@ -156,39 +130,35 @@ console.log(resultOperation)
                                                 {/*type : receive mandat*/}
                                                 {resultOperation.operationType === "MANDAT_RECEIVE" && <tbody>
                                                 <tr>
-                                                    <td>Operation Type</td>
-                                                    <td>{resultOperation.operationType}</td>
+                                                    <td className="WidgetLgUserColumn">Operation Type</td>
+                                                    <td>Mandat reception</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient Name</td>
+                                                    <td className="WidgetLgUserColumn">Recipient Name</td>
                                                     <td>{resultOperation.operationInfo.recipientName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender Name</td>
+                                                    <td className="WidgetLgUserColumn">Sender Name</td>
                                                     <td>{resultOperation.operationInfo.senderName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINrecipient}</td>
+                                                    <td className="WidgetLgUserColumn">CIN</td>
+                                                    <td>{resultOperation.operationInfo.CIN}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINsender}</td>
+                                                    <td className="WidgetLgUserColumn">Sender operation ID</td>
+                                                    <td>{resultOperation.operationInfo.idOperation}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Amount</td>
-                                                    <td>{resultOperation.operationInfo.amount}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Recipient address</td>
+                                                    <td className="WidgetLgUserColumn">Recipient address</td>
                                                     <td>{resultOperation.operationInfo.addressRecipient}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender address</td>
+                                                    <td className="WidgetLgUserColumn">Sender address</td>
                                                     <td>{resultOperation.operationInfo.addressSender}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Date performed</td>
+                                                    <td className="WidgetLgUserColumn">Date performed</td>
                                                     <td>{resultOperation.createdAt.split('T')[0]}</td>
                                                 </tr>
 
@@ -198,39 +168,27 @@ console.log(resultOperation)
                                                 {/*type : deposit*/}
                                                 {resultOperation.operationType === "ACCOUNT_DEPOSIT" && <tbody>
                                                 <tr>
-                                                    <td>Operation Type</td>
-                                                    <td>{resultOperation.operationType}</td>
+                                                    <td className="WidgetLgUserColumn">Operation Type</td>
+                                                    <td>Deposit</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient Name</td>
-                                                    <td>{resultOperation.operationInfo.recipientName}</td>
+                                                    <td className="WidgetLgUserColumn">Full Name</td>
+                                                    <td>{resultOperation.operationInfo.fullName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender Name</td>
-                                                    <td>{resultOperation.operationInfo.senderName}</td>
+                                                    <td className="WidgetLgUserColumn">CIN</td>
+                                                    <td>{resultOperation.operationInfo.CIN}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINrecipient}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sender CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINsender}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Amount</td>
+                                                    <td className="WidgetLgUserColumn">Amount</td>
                                                     <td>{resultOperation.operationInfo.amount}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient address</td>
-                                                    <td>{resultOperation.operationInfo.addressRecipient}</td>
+                                                    <td className="WidgetLgUserColumn">RIB</td>
+                                                    <td>{resultOperation.operationInfo.rib}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender address</td>
-                                                    <td>{resultOperation.operationInfo.addressSender}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date performed</td>
+                                                    <td className="WidgetLgUserColumn">Date performed</td>
                                                     <td>{resultOperation.createdAt.split('T')[0]}</td>
                                                 </tr>
 
@@ -240,81 +198,64 @@ console.log(resultOperation)
                                                 {/*type : withdraw*/}
                                                 {resultOperation.operationType === "ACCOUNT_WITHDRAW" && <tbody>
                                                 <tr>
-                                                    <td>Operation Type</td>
-                                                    <td>{resultOperation.operationType}</td>
+                                                    <td className="WidgetLgUserColumn">Operation Type</td>
+                                                    <td>Withdrawal</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient Name</td>
-                                                    <td>{resultOperation.operationInfo.recipientName}</td>
+                                                    <td className="WidgetLgUserColumn">Full Name</td>
+                                                    <td>{resultOperation.operationInfo.fullName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender Name</td>
-                                                    <td>{resultOperation.operationInfo.senderName}</td>
+                                                    <td className="WidgetLgUserColumn">CIN</td>
+                                                    <td>{resultOperation.operationInfo.CIN}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINrecipient}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sender CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINsender}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Amount</td>
+                                                    <td className="WidgetLgUserColumn">Amount</td>
                                                     <td>{resultOperation.operationInfo.amount}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient address</td>
-                                                    <td>{resultOperation.operationInfo.addressRecipient}</td>
+                                                    <td className="WidgetLgUserColumn">RIB</td>
+                                                    <td>{resultOperation.operationInfo.rib}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender address</td>
-                                                    <td>{resultOperation.operationInfo.addressSender}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date performed</td>
+                                                    <td className="WidgetLgUserColumn">Date performed</td>
                                                     <td>{resultOperation.createdAt.split('T')[0]}</td>
                                                 </tr>
 
                                                 </tbody>}
 
-
                                                 {/*type : create card*/}
                                                 {resultOperation.operationType === "CREATE_EDINAR_CARD" && <tbody>
                                                 <tr>
-                                                    <td>Operation Type</td>
-                                                    <td>{resultOperation.operationType}</td>
+                                                    <td className="WidgetLgUserColumn">Operation Type</td>
+                                                    <td>Create E-dinar Card</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient Name</td>
-                                                    <td>{resultOperation.operationInfo.recipientName}</td>
+                                                    <td className="WidgetLgUserColumn">Full Name</td>
+                                                    <td>{resultOperation.operationInfo.fullName}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender Name</td>
-                                                    <td>{resultOperation.operationInfo.senderName}</td>
+                                                    <td className="WidgetLgUserColumn">CIN</td>
+                                                    <td>{resultOperation.operationInfo.CIN}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINrecipient}</td>
+                                                    <td className="WidgetLgUserColumn">Address</td>
+                                                    <td>{resultOperation.operationInfo.address}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender CIN</td>
-                                                    <td>{resultOperation.operationInfo.CINsender}</td>
+                                                    <td className="WidgetLgUserColumn">Email</td>
+                                                    <td>{resultOperation.operationInfo.email}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Amount</td>
-                                                    <td>{resultOperation.operationInfo.amount}</td>
+                                                    <td className="WidgetLgUserColumn">Occupation</td>
+                                                    <td>{resultOperation.operationInfo.occupation}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Recipient address</td>
-                                                    <td>{resultOperation.operationInfo.addressRecipient}</td>
+                                                    <td className="WidgetLgUserColumn">Phone</td>
+                                                    <td>{resultOperation.operationInfo.phone}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sender address</td>
-                                                    <td>{resultOperation.operationInfo.addressSender}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date performed</td>
+                                                    <td className="WidgetLgUserColumn">Date performed</td>
                                                     <td>{resultOperation.createdAt.split('T')[0]}</td>
                                                 </tr>
 

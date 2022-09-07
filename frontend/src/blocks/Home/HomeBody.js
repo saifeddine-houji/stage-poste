@@ -26,10 +26,6 @@ const HomeBody = ()=>{
                 <button className="btn btn-success col-2" onClick={() => setShow(5)}>Show my history</button>
             </div>
 
-    {/*<button className="btn btn-primary" >
-                    <Link style={{"color":"white"}} to="#">Add entries</Link>
-                </button>*/}
-
             {show === 0 && <MandatSendForm/> }
             {show === 1 && <MandatReceiveForm/> }
             {show === 2 && <DepositForm/> }

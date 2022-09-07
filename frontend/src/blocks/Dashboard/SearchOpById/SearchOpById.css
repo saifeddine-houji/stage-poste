@@ -4,3 +4,10 @@
     margin-top: 10px;
     top: 80px;
 }
+
+.WidgetLgUserColumn{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #000;
+}
